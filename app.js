@@ -29,6 +29,12 @@ app.use('/api',userRouter)
 //用户信息路由
 const userinfoRouter = require('./router/userinfo')
 app.use('/my',userinfoRouter)
+ //文章分类路由
+const cateRouter = require('./router/cate')
+app.use('/my/cate',cateRouter)
+ //文章路由
+const articleRouter = require('./router/article')
+app.use('/my/article',articleRouter)
 
 const Joi = require('joi')
 //定义错误级别中间件

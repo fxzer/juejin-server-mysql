@@ -47,3 +47,13 @@ exports.updatePwd = (req, res) => {
     });
   });
 };
+
+//修改头像
+exports.updateAvatar = (req,res)=>{
+  const updateSql = 'update ev_user set avatar = ? where id = ?'
+  db.query(updateSql,[req.body.avatar,req.auth.id],(err,result)=>{
+    if(err) return res.cc(err)
+    if(result.affectedRows !== 1) return res.cc('头像修改失败!')
+    res.cc('头像修改成功!',0)
+  })
+}

@@ -28,3 +28,9 @@ exports.update_pwd_schema = {
     newPwd:Joi.not(Joi.ref('oldPwd')).concat(password)
   }
 }
+//用户修改头像验证规则
+exports.update_avatar_schema = {
+  body:{
+    avatar
+  }
+}
