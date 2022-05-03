@@ -5,10 +5,8 @@ const {jwtSecretKey,expiresIn} = require('../config')
 //注册
 exports.register = (req, res) => {
   let userinfo = req.body;
-
   //查重
   const querySql = "select * from ev_user where username=?";
-
   db.query(querySql, userinfo.username, (err, result) => {
     if (err) {
       return res.cc(err);
@@ -53,7 +51,7 @@ exports.login = (req, res) => {
     //服务器生成Token
 
     // 排除password和头像
-    const user = { ...result[0],password:undefined,avatar:undefined}
+    const user = { ...result[0],password:'',avatar:''}
     //生成token
     const tokenStr = jwt.sign(user,jwtSecretKey,{expiresIn})
     

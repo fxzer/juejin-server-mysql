@@ -22,12 +22,15 @@ app.use((req,res,next)=>{
 let { expressjwt } = require("express-jwt");
 const config= require('./config')
 
-app.use(expressjwt({secret:config.jwtSecretKey,algorithms: ["HS256"] }).unless({path:[/^\/api$/]}))
+app.use(expressjwt({secret:config.jwtSecretKey,algorithms: ["HS256"] }).unless({path:[/\/api/]}))
 //路由
-const router = require('./router/user')
-const Joi = require('joi')
-app.use('/api',router)
+const userRouter = require('./router/user')
+app.use('/api',userRouter)
+//用户信息路由
+const userinfoRouter = require('./router/userinfo')
+app.use('/my',userinfoRouter)
 
+const Joi = require('joi')
 //定义错误级别中间件
 app.use((err,req,res,next)=>{
   //校验失败
