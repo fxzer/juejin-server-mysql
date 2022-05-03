@@ -20,3 +20,11 @@ exports.update_user_schema = {
     id,nickname,avatar,email
   }
 }
+//用户修改密码验证规则
+exports.update_pwd_schema = {
+  body:{
+    oldPwd:password,
+    //旧密码不能和新密码保持一致 且满足密码校验规则
+    newPwd:Joi.not(Joi.ref('oldPwd')).concat(password)
+  }
+}
